@@ -29,3 +29,8 @@ java {
 	sourceCompatibility = JavaVersion.VERSION_25
 	targetCompatibility = JavaVersion.VERSION_25
 }
+
+// CI only: boot the server, force-apply every mixin, then shut down.
+if (project.hasProperty('mixinAudit')) {
+	loom.runs.server.vmArg('-Dadminvanish.mixinAudit=true')
+}

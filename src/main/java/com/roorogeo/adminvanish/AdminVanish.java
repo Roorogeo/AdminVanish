@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.message.v1.ServerMessageEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import org.slf4j.Logger;
+import org.spongepowered.asm.mixin.MixinEnvironment;
 import org.slf4j.LoggerFactory;
 
 public class AdminVanish implements ModInitializer {
@@ -25,5 +26,14 @@ public class AdminVanish implements ModInitializer {
 		ServerPlayConnectionEvents.DISCONNECT.register((handler, server) -> VanishManager.onDisconnect(handler.player));
 
 		ServerMessageEvents.ALLOW_GAME_MESSAGE.register((server, message, overlay) -> VanishManager.allowGameMessage(message));
+
+		if (Boolean.getBoolean("adminvanish.mixinAudit")) {
+			// Used by CI: load every mixin target so a broken injection fails the build.
+			ServerLifecycleEvents.SERVER_STARTED.register(server -> {
+				MixinEnvironment.getCurrentEnvironment().audit();
+				LOGGER.info("AdminVanish mixin audit passed");
+				server.halt(false);
+			});
+		}
 	}
 }
