@@ -1,0 +1,20 @@
+{
+	"required": true,
+	"package": "com.roorogeo.adminvanish.mixin",
+	"compatibilityLevel": "JAVA_25",
+	"mixins": [
+		"ChunkMapAccessor",
+		"PlayerInfoUpdatePacketAccessor",
+		"PlayerListMixin",
+		"PlayerMixin",
+		"ServerCommonPacketListenerImplMixin",
+		"ServerGamePacketListenerImplMixin",
+		"TrackedEntityMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"overwrites": {
+		"requireAnnotations": true
+	}
+}
