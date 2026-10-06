@@ -1,0 +1,31 @@
+{
+	"schemaVersion": 1,
+	"id": "adminvanish",
+	"version": "${version}",
+	"name": "AdminVanish",
+	"description": "Server-side vanish for admins: hidden from the tab list and world, creative no-clip, silent joins/leaves and fake join/leave messages.",
+	"authors": [
+		"roorogeo"
+	],
+	"contact": {
+		"sources": "https://github.com/roorogeo/adminvanish"
+	},
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.roorogeo.adminvanish.AdminVanish"
+		]
+	},
+	"mixins": [
+		"adminvanish.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.19.5",
+		"minecraft": "~26.2",
+		"java": ">=25",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"fabric-permissions-api-v0": "*"
+	}
+}
