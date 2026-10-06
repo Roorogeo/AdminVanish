@@ -65,7 +65,7 @@ public final class InvseeCommand {
 
 	/**
 	 * Five rows: main inventory, hotbar, then helmet, chestplate, leggings, boots and offhand.
-	 * The remaining four slots are locked placeholders.
+	 * The remaining four slots are locked placeholders (barriers).
 	 */
 	private static final class InventoryView implements Container {
 		private static final int SIZE = 45;
@@ -73,7 +73,7 @@ public final class InvseeCommand {
 		private static final EquipmentSlot[] EQUIPMENT = {
 				EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET, EquipmentSlot.OFFHAND
 		};
-		private static final ItemStack FILLER = new ItemStack(Items.GRAY_STAINED_GLASS_PANE);
+		private static final ItemStack FILLER = new ItemStack(Items.BARRIER);
 
 		private final ServerPlayer target;
 
