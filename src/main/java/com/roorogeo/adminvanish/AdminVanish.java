@@ -16,7 +16,10 @@ public class AdminVanish implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> VanishCommand.register(dispatcher));
+		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
+			VanishCommand.register(dispatcher);
+			InvseeCommand.register(dispatcher);
+		});
 
 		ServerLifecycleEvents.SERVER_STARTING.register(VanishManager::onServerStarting);
 		ServerLifecycleEvents.SERVER_STOPPED.register(server -> VanishManager.onServerStopped());

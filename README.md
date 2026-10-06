@@ -23,6 +23,8 @@ need to install anything. It also works in singleplayer/LAN.
   fake "*X joined the game*". You can also send them by hand.
 - **Teleport while vanished**: `/adminvanish <player>` vanishes you (if you aren't already) and
   teleports you to that player, across dimensions too.
+- **Inventory and ender chest viewing**: `/invsee <player>` and `/endersee <player>` open a live,
+  editable view of an online player's inventory (including armor and offhand) or ender chest.
 
 ## Commands
 
@@ -36,6 +38,8 @@ need to install anything. It also works in singleplayer/LAN.
 | `/adminvanish fakeleave` | Broadcast a fake "left the game" message for yourself |
 | `/adminvanish noclip` | Toggle moving through blocks while vanished |
 | `/adminvanish list` | List vanished players |
+| `/invsee <player>` | View and edit a player's inventory: rows 1-3 are the main inventory, row 4 the hotbar, row 5 helmet, chestplate, leggings, boots and offhand |
+| `/endersee <player>` | View and edit a player's ender chest |
 
 ## Permissions
 
@@ -43,6 +47,8 @@ need to install anything. It also works in singleplayer/LAN.
 | --- | --- | --- |
 | `adminvanish.use` | op (level 2+) | Using `/adminvanish` |
 | `adminvanish.see` | op (level 2+) | Seeing vanished players and getting staff notices |
+| `adminvanish.invsee` | op (level 2+) | Using `/invsee` |
+| `adminvanish.endersee` | op (level 2+) | Using `/endersee` |
 
 Permission nodes work with any permissions mod that supports the
 [Fabric Permissions API](https://github.com/lucko/fabric-permissions-api) (e.g. LuckPerms).

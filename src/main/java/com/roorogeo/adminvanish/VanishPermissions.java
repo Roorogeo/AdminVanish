@@ -14,6 +14,8 @@ import java.lang.reflect.Method;
 public final class VanishPermissions {
 	public static final String USE = "adminvanish.use";
 	public static final String SEE = "adminvanish.see";
+	public static final String INVSEE = "adminvanish.invsee";
+	public static final String ENDERSEE = "adminvanish.endersee";
 
 	private static final Method PERMISSIONS_CHECK = findPermissionsApi();
 
