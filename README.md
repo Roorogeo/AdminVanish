@@ -10,6 +10,12 @@ need to install anything. It also works in singleplayer/LAN.
   - have **no player model, name tag, armor or held items** visible to them (your entity is never sent)
   - are put in **creative mode** and can **fly through blocks** (no-clip)
   - your previous game mode comes back when you unvanish
+- **Nothing gives you away**:
+  - you're left out of `/list` and the server list's player count and names
+  - you don't earn advancements, so nothing is announced in chat
+  - sounds you cause (breaking/placing blocks, doors, ...) aren't heard by other players, and you
+    don't set off sculk sensors or wardens
+  - chests, barrels, ender chests and shulker boxes open **silently with no lid animation**
 - **Silent joins and leaves**: vanish state is saved (in `config/adminvanish.json`), so a vanished
   player stays vanished after relogging or a restart, and their join/leave messages are suppressed.
   Staff who can see vanished players get a private `[AdminVanish]` notice instead.
@@ -54,8 +60,9 @@ change hotbar slots**. Pick items in the inventory screen (`E`) instead, or turn
 
 ## Not hidden
 
-Chat messages you send, `/list` output, the server list player count, advancement announcements
-and sounds you cause (e.g. breaking blocks) can still reveal you.
+Chat messages you send and commands that target players (like `/msg` or `@a`) can still reveal
+you. Staff with `adminvanish.see` still see you everywhere and hear your sounds, and the console
+still lists you in `/list`.
 
 ## Building
 

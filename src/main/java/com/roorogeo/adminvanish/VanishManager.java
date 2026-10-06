@@ -12,6 +12,7 @@ import net.minecraft.network.protocol.game.ClientboundPlayerInfoUpdatePacket;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.GameType;
 
 import java.util.ArrayList;
@@ -89,6 +90,19 @@ public final class VanishManager {
 
 	public static boolean isVanished(ServerPlayer player) {
 		return vanished.containsKey(player.getUUID());
+	}
+
+	/** True for vanished players; false for any other entity, including null. */
+	public static boolean isVanished(Entity entity) {
+		return entity instanceof ServerPlayer player && isVanished(player);
+	}
+
+	/** {@code players} without the vanished ones, unless {@code viewer} can see them (null viewer = hide all). */
+	public static List<ServerPlayer> visiblePlayers(List<ServerPlayer> players, ServerPlayer viewer) {
+		if (vanished.isEmpty() || viewer != null && canSeeVanished(viewer)) {
+			return players;
+		}
+		return players.stream().filter(player -> !isVanished(player)).toList();
 	}
 
 	public static boolean isVanished(UUID uuid) {

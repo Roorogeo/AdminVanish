@@ -4,11 +4,17 @@
 	"compatibilityLevel": "JAVA_25",
 	"mixins": [
 		"ChunkMapAccessor",
+		"ContainerOpenersCounterMixin",
+		"ListPlayersCommandMixin",
+		"MinecraftServerMixin",
+		"PlayerAdvancementsMixin",
 		"PlayerInfoUpdatePacketAccessor",
 		"PlayerListMixin",
 		"PlayerMixin",
 		"ServerCommonPacketListenerImplMixin",
 		"ServerGamePacketListenerImplMixin",
+		"ServerLevelMixin",
+		"ShulkerBoxBlockEntityMixin",
 		"TrackedEntityMixin"
 	],
 	"injectors": {
