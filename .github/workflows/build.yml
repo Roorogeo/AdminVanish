@@ -23,10 +23,19 @@ jobs:
         with:
           name: AdminVanish
           path: build/libs/
-      - name: boot a dedicated server and apply all mixins
+      - name: dump signatures
         run: |
-          mkdir -p run
-          echo "eula=true" > run/eula.txt
-          printf 'online-mode=false\nlevel-type=minecraft\\:flat\n' > run/server.properties
-          timeout 600 ./gradlew runServer -PmixinAudit --args=nogui 2>&1 | tee server.log
-          grep -q "AdminVanish mixin audit passed" server.log
+          JAR=~/.gradle/caches/fabric-loom/26.2/minecraft-merged.jar
+          for c in net.minecraft.server.commands.ListPlayersCommand net.minecraft.server.PlayerAdvancements \
+                   net.minecraft.world.level.block.entity.ContainerOpenersCounter net.minecraft.world.level.block.entity.ShulkerBoxBlockEntity \
+                   net.minecraft.world.level.block.entity.ChestBlockEntity net.minecraft.world.level.block.entity.EnderChestBlockEntity \
+                   net.minecraft.world.level.block.entity.BarrelBlockEntity net.minecraft.world.Container net.minecraft.world.entity.ContainerUser \
+                   net.minecraft.server.players.PlayerList 'net.minecraft.world.level.gameevent.GameEvent$Context' net.minecraft.world.level.block.entity.LidBlockEntity; do
+            echo "===== $c"; javap -p -cp "$JAR" "$c" | grep -vE 'lambda\$' || true
+          done
+          javap -p -cp "$JAR" net.minecraft.server.MinecraftServer | grep -iE 'status|playerCount|sample' || true
+          javap -p -cp "$JAR" net.minecraft.server.level.ServerLevel | grep -iE 'sound|levelEvent|gameEvent|blockEvent' || true
+          echo "===== bytecode"
+          javap -c -p -cp "$JAR" net.minecraft.server.commands.ListPlayersCommand | grep -E 'invoke|static int format' || true
+          javap -c -p -cp "$JAR" net.minecraft.world.level.block.entity.ContainerOpenersCounter | grep -E 'invoke|^  [a-z].*\(' || true
+          javap -c -p -cp "$JAR" net.minecraft.server.MinecraftServer | sed -n '/buildPlayerStatus/,/^$/p' | grep -E 'invoke|Status' || true
